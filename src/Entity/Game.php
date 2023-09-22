@@ -44,7 +44,7 @@ class Game
         return $this->isEnded;
     }
 
-    public function endGame(): void
+    public function finishGame(): void
     {
         $this->isEnded = true;
     }
@@ -61,5 +61,10 @@ class Game
 
         $this->homeScore = $homeScore;
         $this->awayScore = $awayScore;
+    }
+
+    public function getTotalScore(): int
+    {
+        return $this->homeScore + $this->awayScore;
     }
 }

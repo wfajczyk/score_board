@@ -18,7 +18,7 @@ class Board
 
     public function addGame(Game $game): void
     {
-        $key = strtolower($game->getHome()->getName() . '_' . $game->getAway()->getName());
+        $key = $this->getKey($game->getHome(), $game->getAway());
         if (!isset($this->games[$key])) {
             $this->games[$key] = $game;
 
@@ -31,6 +31,16 @@ class Board
         $this->games[$key] = $game;
     }
 
+    public function getGame(Team $home, Team $away): ?Game
+    {
+        return $this->games[$this->getKey($home, $away)] ?? null;
+    }
+
+    public function removeGame(Team $home, Team $away): void
+    {
+        unset($this->games[$this->getKey($home, $away)]);
+    }
+
     /**
      * @return array<string,Game>
      */
@@ -39,4 +49,8 @@ class Board
         return $this->games;
     }
 
+    private function getKey(Team $home, Team $away): string
+    {
+        return strtolower($home->getName() . '_' . $away->getName());
+    }
 }

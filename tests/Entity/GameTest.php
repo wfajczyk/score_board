@@ -38,7 +38,7 @@ class GameTest extends TestCase
         self::assertEquals(5, $game->getAwayScore());
     }
 
-    public function testUpdateInvalid(): void
+    public function testUpdateInvalidHome(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -52,6 +52,20 @@ class GameTest extends TestCase
         $game->updateScore(-1,-1);
     }
 
+    public function testUpdateInvalidAway(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $teamHome = new Team('Mexico');
+        $teamAway = new Team('Canada');
+        $game = new Game($teamHome, $teamAway);
+
+        self::assertEquals(0, $game->getHomeScore());
+        self::assertEquals(0, $game->getAwayScore());
+
+        $game->updateScore(1,-1);
+    }
+
     public function testEnded(): void
     {
         $teamHome = new Team('Mexico');
@@ -60,7 +74,7 @@ class GameTest extends TestCase
 
         self::assertFalse($game->isEnded());
 
-        $game->endGame();
+        $game->finishGame();
 
         self::assertTrue($game->isEnded());
     }
