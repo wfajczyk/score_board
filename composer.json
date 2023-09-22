@@ -1,0 +1,22 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Score\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Score\\Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.10",
+    "phpunit/phpunit": "^10.3"
+  },
+  "scripts": {
+    "test": [
+      "vendor/bin/phpstan analyse",
+      "vendor/bin/phpunit"
+    ]
+  }
+}
