@@ -24,9 +24,7 @@ class ScoreBoard
 
     public function uploadScore(Team $home, Team $away, int $homeScore, int $awayScore): void
     {
-        $game = $this->getGame($home, $away);
-
-        $game->updateScore($homeScore, $awayScore);
+        $this->getGame($home, $away)->updateScore($homeScore, $awayScore);
     }
 
     public function finishGame(Team $home, Team $away): void
@@ -46,6 +44,7 @@ class ScoreBoard
             if ($b->getTotalScore() < $a->getTotalScore()) {
                 return 1;
             }
+
             return 0;
         });
 
